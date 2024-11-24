@@ -1,37 +1,44 @@
 import './App.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import RoommateSelector from './components/RoommateSelector';
 import TimeViewSelector from './components/TimeViewSelector';
 import Calendar from './components/Calendar';
 import TaskContainer from './components/TaskContainer';
 import TodoBoard from './components/TodoBoard';
 import AddTodo from './components/AddTodo';
+import {db} from './firebase';
 
-// Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-// Your web app's Firebase configuration
-const firebaseConfig = {
-  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
-  authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
-  projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
-  storageBucket: "roomieboard.firebasestorage.app",
-  messagingSenderId: "376622126162",
-  appId: "1:376622126162:web:6e906fba25d588776b7b8b"
-};
-
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
+//firebase functions
+import { addTodo, getTodos, deleteTodo } from './firebase';
 
 function App() {
   const [isAddTodoVisible, setIsAddTodoVisible] = useState(false);
+  const [todos, setTodos] = useState([]);
+
+  useEffect(() => {
+    const fetchTodos = async () => {
+      const todos = await getTodos();
+      setTodos(todos);
+    };
+    fetchTodos();
+  }, [])
 
   function toDoAddClickHandler(event) {
-    console.log("Add task clicked");
     setIsAddTodoVisible(!isAddTodoVisible);
   }
+
+  const handleAddTodo = async (todo) => {
+    await addTodo(todo);
+    const todos = await getTodos();
+    setTodos(todos);
+    setIsAddTodoVisible(false);
+  };
+
+  const handleDeleteTodo = async (id) => {
+    await deleteTodo(id);
+    const todos = await getTodos();
+    setTodos(todos);
+  };
 
   return (
     <div className="App font-sans">
@@ -42,8 +49,8 @@ function App() {
       </div>
       <div className="right-side">
         <TaskContainer />
-        <TodoBoard toDoAddClickHandler={toDoAddClickHandler} />
-        <AddTodo isAddTodoVisible={isAddTodoVisible} />
+        <TodoBoard toDoAddClickHandler={toDoAddClickHandler} todos={todos} onDeleteTodo={handleDeleteTodo} />
+        <AddTodo isAddTodoVisible={isAddTodoVisible} onAddTodo={handleAddTodo} />
       </div>
     </div>
   );
