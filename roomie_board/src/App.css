@@ -1,10 +1,17 @@
-.App {
-  text-align: center;
+html{
+  margin-left: 0;  
+  margin-right: 0;
+  background-color: white
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.App {
+
+}
+
+.App-body{
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -14,25 +21,40 @@
 }
 
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+  background-color: wheat;
+  min-height: 20px;
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 16px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  font-size: calc(8px + 2vmin);
+  color: rgb(0, 0, 0);
 }
 
 .App-link {
   color: #61dafb;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.roommate-container { 
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.roommate-container h1{ 
+  font-size: calc(10px + 2vmin);
+  font-weight: 700;
+}
+
+
+#select-roommate {
+  margin-right: 8px;
+  height: calc(12px + 2vmin);
+  font-weight: 700;
+  font-size: calc(8px + 2vmin);
 }
