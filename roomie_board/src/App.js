@@ -11,6 +11,7 @@ import { addTodo, getTodos, deleteTodo, getRoommates } from './firebase';
 
 function App() {
   const [isAddTodoVisible, setIsAddTodoVisible] = useState(false);
+  const [isAddRoommateVisible, setIsAddRoommateVisible] = useState(false);
   const [currentView, setCurrentView] = useState('timeGridWeek');
   const [currentMonth, setCurrentMonth] = useState(new Date().toLocaleString('default', { month: 'long' }));
   const calendarRef = useRef(null);
@@ -74,6 +75,15 @@ function App() {
     }
   };
 
+  const handleAddRoommateClick = () => {
+    setIsAddRoommateVisible(true);
+  };
+
+  const handleRoommateAdded = async () => {
+    const roommates = await getRoommates();
+    setRoommates(roommates);
+  };
+
   const handleViewChange = (newView) => {
     setCurrentView(newView);
   };
@@ -85,7 +95,10 @@ function App() {
   return (
     <div className="App font-sans">
       <div className="left-side">
-        <RoommateSelector />
+        <RoommateSelector 
+        selectedRoommate={selectedRoommate} 
+        onSelectRoommate={setSelectedRoommate} 
+        onAddRoommateClick={handleAddRoommateClick}/>
         <TimeViewSelector 
           onViewChange={handleViewChange} 
           currentView={currentView}
@@ -98,7 +111,9 @@ function App() {
           onMonthChange={handleMonthChange}
           calendarRef={calendarRef}
         />
-        <RoommateSelector selectedRoommate={selectedRoommate} onSelectRoommate={setSelectedRoommate} />
+        <RoommateSelector 
+        selectedRoommate={selectedRoommate} 
+        onSelectRoommate={setSelectedRoommate} />
         <TimeViewSelector />
         <Calendar />
       </div>
