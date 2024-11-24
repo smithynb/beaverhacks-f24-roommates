@@ -1,5 +1,5 @@
 import './App.css';
-import { useState, useEffect } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import RoommateSelector from './components/RoommateSelector';
 import TimeViewSelector from './components/TimeViewSelector';
 import Calendar from './components/Calendar';
@@ -10,6 +10,9 @@ import { addTodo, getTodos, deleteTodo, getRoommates } from './firebase';
 
 function App() {
   const [isAddTodoVisible, setIsAddTodoVisible] = useState(false);
+  const [currentView, setCurrentView] = useState('timeGridWeek');
+  const [currentMonth, setCurrentMonth] = useState(new Date().toLocaleString('default', { month: 'long' }));
+  const calendarRef = useRef(null);
   const [todos, setTodos] = useState([]);
   const [selectedRoommate, setSelectedRoommate] = useState('');
   const [roommates, setRoommates] = useState([]);
@@ -70,9 +73,30 @@ function App() {
     }
   };
 
+  const handleViewChange = (newView) => {
+    setCurrentView(newView);
+  };
+
+  const handleMonthChange = (newMonth) => {
+    setCurrentMonth(newMonth);
+  };
+
   return (
     <div className="App font-sans">
       <div className="left-side">
+        <RoommateSelector />
+        <TimeViewSelector 
+          onViewChange={handleViewChange} 
+          currentView={currentView}
+          currentMonth={currentMonth}
+          onMonthChange={handleMonthChange}
+          calendarRef={calendarRef}
+        />
+        <Calendar 
+          currentView={currentView} 
+          onMonthChange={handleMonthChange}
+          calendarRef={calendarRef}
+        />
         <RoommateSelector selectedRoommate={selectedRoommate} onSelectRoommate={setSelectedRoommate} />
         <TimeViewSelector />
         <Calendar />
