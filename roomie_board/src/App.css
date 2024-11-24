@@ -115,8 +115,8 @@ html{
   padding: 8px;
   display: flex;
   position: fixed;
-  top: 33%;
-  left: 33%;
+  top: 40%;
+  left: 55%;
   flex-direction: column;
   align-items: left;
   justify-content: left;
