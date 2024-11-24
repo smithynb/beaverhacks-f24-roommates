@@ -111,11 +111,6 @@ function App() {
           onMonthChange={handleMonthChange}
           calendarRef={calendarRef}
         />
-        <RoommateSelector 
-        selectedRoommate={selectedRoommate} 
-        onSelectRoommate={setSelectedRoommate} />
-        <TimeViewSelector />
-        <Calendar />
       </div>
       <div className="right-side">
         <TaskContainer />
