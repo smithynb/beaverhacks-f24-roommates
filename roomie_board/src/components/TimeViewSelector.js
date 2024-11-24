@@ -1,8 +1,30 @@
-import React from 'react';
+import { useState } from 'react';
 import './Calendar.css'
 
 
-const TimeViewSelector = ({ onViewChange, currentView, currentMonth }) => {
+const TimeViewSelector = ({ onViewChange, currentView, currentMonth, onMonthChange, calendarRef }) => {
+  const [currentDate, setCurrentDate] = useState(new Date());
+
+  const handlePrevMonth = () => {
+    if (calendarRef.current && calendarRef.current.getApi()) {
+      const newDate = new Date(currentDate);
+      newDate.setMonth(currentDate.getMonth() - 1);
+      setCurrentDate(newDate);
+      onMonthChange(newDate.toLocaleString('default', { month: 'long' }));
+      calendarRef.current.getApi().prev();
+    }
+  };
+
+  const handleNextMonth = () => {
+    if (calendarRef.current && calendarRef.current.getApi()) {
+      const newDate = new Date(currentDate);
+      newDate.setMonth(currentDate.getMonth() + 1);
+      setCurrentDate(newDate);
+      onMonthChange(newDate.toLocaleString('default', { month: 'long' }));
+      calendarRef.current.getApi().next();
+    }
+  };
+
   return (
     <div className="time-view-container">
       <div className="selector-content">

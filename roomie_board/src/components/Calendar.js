@@ -25,7 +25,7 @@ function Calendar({ currentView, onMonthChange }) {
 
   return (
     <div className="App">
-      <div className="calendar-navigation">
+      <div className="navigation-buttons">
         <button onClick={handlePrevMonth}>&larr;</button>
         <button onClick={handleNextMonth}>&rarr;</button>
       </div>

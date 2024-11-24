@@ -107,9 +107,77 @@
   .button-group {
     display: flex;
     gap: 1rem;
+    margin-left: 500px;
   }
 
   .calendar-container {
-    position: relative;
+    margin: 20px;
+    font-family: Arial, sans-serif;
+  }
+  .calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
   }
   
+  .calendar-month {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  
+  .calendar-navigation {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .calendar-navigation button {
+    padding: 5px 10px;
+    font-size: 1rem;
+    cursor: pointer;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .calendar-navigation button:hover {
+    background-color: #0056b3;
+  }
+  
+  .calendar-header {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 1rem;
+    padding-left: 1rem
+  }
+  
+  .month-navigation {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  .current-month {
+    font-size: 1.2rem;
+    font-weight: 500;
+  }
+  
+  .navigation-buttons {
+    display: flex;
+    gap: 0.5rem;
+  }
+  
+  .navigation-buttons button {
+    padding: 0.25rem 0.75rem;
+    border: 1px solid #ddd;
+    background: white;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  
+  .navigation-buttons button:hover {
+    background-color: #f5f5f5;
+  }
