@@ -1,6 +1,6 @@
 import React from 'react';
 
-function TodoBoard({ toDoAddClickHandler }) {
+function TodoBoard({toDoAddClickHandler, todos, onDeleteTodo }) {
   return (
     <div className="todo-board-container">
       <div className="todo-title">
@@ -8,9 +8,14 @@ function TodoBoard({ toDoAddClickHandler }) {
         <button onClick={toDoAddClickHandler}>+</button>
       </div>
       <div className="todo-list">
-        <label>
-          <input type="checkbox" />Clean the stove
-        </label>
+        {todos.map(todo => (
+            <div key={todo.id}>
+              <label>
+                <input type="checkbox" />{todo.task}
+              </label>
+              <button onClick={() => onDeleteTodo(todo.id)}>-</button>
+            </div>
+        ))}
       </div>
     </div>
   );

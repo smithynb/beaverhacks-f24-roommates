@@ -105,9 +105,12 @@ html{
   height: 28px;
   width: 28px;
   font-size: 18px;
+  transition-duration: 0.3s;
   border: none;
 }
 .todo-title button:hover {
+  transition-duration: 0.3s;
+  background-color: rgb(58, 0, 159);
   cursor: pointer;
 }
 
@@ -115,8 +118,8 @@ html{
   padding: 8px;
   display: flex;
   position: fixed;
-  top: 33%;
-  left: 33%;
+  top: 40%;
+  left: 55%;
   flex-direction: column;
   align-items: left;
   justify-content: left;
@@ -124,7 +127,7 @@ html{
   border-radius: 8px;
   height: 266px;
   width: 300px;
-  box-shadow: 4px 4px darkviolet;
+  box-shadow: 4px 4px rgb(58, 0, 159);
 }
 #add-todo-container h3 {
   font-size: 18px;
@@ -148,9 +151,12 @@ html{
   border-radius: 8px;
   border: none;
   color: white;
-  background-color: rgb(93, 0, 255);;
+  background-color: rgb(93, 0, 255);
+  transition-duration: 0.3s;
 }
 #add-todo-container button:hover {
+  transition-duration: 0.3s;
+  background-color: rgb(58, 0, 159);
   cursor: pointer;
 }
 
@@ -182,7 +188,37 @@ html{
   width: 96px;
   font-size: 16px;
   border: none;
+  transition-duration: 0.3s;
 }
 .task-container button:hover {
+  transition-duration: 0.3s;
+  background-color: rgb(58, 0, 159);
   cursor: pointer;
 }
+.task-title-container{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: left;
+  margin-top: 12px;
+  margin-bottom: 12px;
+}
+.task-title-container h2 {
+  margin-right: 12px;
+}
+
+.todo-list button {
+  border: none;
+  background-color: lightcoral;
+  margin-left: 12px;
+  border-radius: 4px;
+}
+.todo-list button:hover {
+  background-color: red;
+  cursor: pointer;
+}
+
+.todo-list {
+  accent-color: rgb(93, 0, 255);
+}
+
