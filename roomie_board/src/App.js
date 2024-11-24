@@ -7,6 +7,24 @@ import TaskContainer from './components/TaskContainer';
 import TodoBoard from './components/TodoBoard';
 import AddTodo from './components/AddTodo';
 
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+const firebaseConfig = {
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+  authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
+  storageBucket: "roomieboard.firebasestorage.app",
+  messagingSenderId: "376622126162",
+  appId: "1:376622126162:web:6e906fba25d588776b7b8b"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+
 function App() {
   const [isAddTodoVisible, setIsAddTodoVisible] = useState(false);
 
