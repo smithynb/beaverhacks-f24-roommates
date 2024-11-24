@@ -6,20 +6,21 @@ import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
 
-
-function Calendar() {
+function Calendar({ currentView }) {
   return (
     <div className="App">
       <FullCalendar
+        key={currentView} 
         plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
-        initialView="timeGridWeek"
-        headerToolbar={{
-          center: "dayGridMonth,timeGridWeek,timeGridDay new",
-        }}
-        eventColor="red"
-        nowIndicator
-        dateClick={(e) => console.log(e.dateStr)}
-        eventClick={(e) => console.log(e.event.id)}
+        initialView={currentView}
+        headerToolbar={false}
+        height="auto"
+        events={[
+          {
+            title: 'Sample Event',
+            start: new Date(),
+          }
+        ]}
       />
     </div>
   );

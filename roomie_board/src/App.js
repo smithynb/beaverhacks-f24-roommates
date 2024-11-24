@@ -27,18 +27,26 @@ const app = initializeApp(firebaseConfig);
 
 function App() {
   const [isAddTodoVisible, setIsAddTodoVisible] = useState(false);
+  const [currentView, setCurrentView] = useState('timeGridWeek');
 
   function toDoAddClickHandler(event) {
     console.log("Add task clicked");
     setIsAddTodoVisible(!isAddTodoVisible);
   }
 
+  const handleViewChange = (newView) => {
+    setCurrentView(newView);
+  };
+
   return (
     <div className="App font-sans">
       <div className="left-side">
         <RoommateSelector />
-        <TimeViewSelector />
-        <Calendar />
+        <TimeViewSelector 
+          onViewChange={handleViewChange} 
+          currentView={currentView} 
+        />
+        <Calendar currentView={currentView} />
       </div>
       <div className="right-side">
         <TaskContainer />
