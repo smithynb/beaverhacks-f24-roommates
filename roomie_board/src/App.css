@@ -114,57 +114,7 @@ html{
   cursor: pointer;
 }
 
-#add-todo-container {
-  padding: 8px;
-  display: flex;
-  position: fixed;
-  top: 40%;
-  left: 55%;
-  flex-direction: column;
-  align-items: left;
-  justify-content: left;
-  background-color: rgb(230, 218, 255);
-  border-radius: 8px;
-  height: 266px;
-  width: 300px;
-  box-shadow: 4px 4px rgb(58, 0, 159);
-}
-#add-todo-container h3 {
-  font-size: 18px;
-  font-weight: 700;
-}
-#add-todo-container .todo-input-element {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-}
-#add-todo-container .todo-input-element label,
-#add-todo-container .todo-input-element input,
-#add-todo-container .todo-input-element select {
-  margin-bottom: 10px;
-  width: 60%;
-  text-wrap: wrap;
-}
-#add-todo-container button {
-  width: 20%;
-  height: 30px;
-  border-radius: 8px;
-  border: none;
-  color: white;
-  background-color: rgb(93, 0, 255);
-  transition-duration: 0.3s;
-}
-#add-todo-container button:hover {
-  transition-duration: 0.3s;
-  background-color: rgb(58, 0, 159);
-  cursor: pointer;
-}
-
 .hidden{
-  display: none;
-}
-
-#add-todo-container.hidden {
   display: none;
 }
 
@@ -222,3 +172,153 @@ html{
   accent-color: rgb(93, 0, 255);
 }
 
+#add-roommate-container {
+  padding: 8px;
+  display: none;
+  flex-direction: column;
+  align-items: left;
+  justify-content: left;
+  background-color: rgb(230, 218, 255);
+  border-radius: 8px;
+  height: 200px;
+  width: 300px;
+  box-shadow: 4px 4px darkviolet;
+  cursor: move;
+}
+
+#add-roommate-container.visible {
+  display: flex; /* Show when the visible class is added */
+}
+
+#add-roommate-container h3 {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+#add-roommate-container .roommate-input-element {
+  display: flex;
+  flex-direction: column;
+}
+
+#add-roommate-container .roommate-input-element label {
+  margin-bottom: 8px;
+}
+
+#add-roommate-container .roommate-input-element input {
+  margin-bottom: 12px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+#add-roommate-container .roommate-input-element button {
+  background-color: rgb(93, 0, 255);
+  color: white;
+  border-radius: 8px;
+  height: 28px;
+  width: 96px;
+  font-size: 16px;
+  border: none;
+  transition-duration: 0.3s;
+}
+
+#add-roommate-container .roommate-input-element button:hover {
+  background-color: rgb(58, 0, 159);
+  cursor: pointer;
+}
+
+#add-roommate-container .error {
+  color: red;
+  font-size: 14px;
+}
+
+#add-roommate-container .close-button {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background-color: lightcoral;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+#add-todo-container {
+  padding: 8px;
+  display: none; 
+  flex-direction: column;
+  align-items: left;
+  justify-content: left;
+  background-color: rgb(230, 218, 255);
+  border-radius: 8px;
+  height: 266px;
+  width: 300px;
+  box-shadow: 4px 4px darkviolet;
+  cursor: move; 
+  position: relative; 
+}
+
+#add-todo-container.visible {
+  display: flex; 
+}
+
+#add-todo-container h3 {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+#add-todo-container .todo-input-element {
+  display: flex;
+  flex-direction: column;
+}
+
+#add-todo-container .todo-input-element label {
+  margin-bottom: 8px;
+}
+
+#add-todo-container .todo-input-element input {
+  margin-bottom: 12px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+#add-todo-container .todo-input-element select {
+  margin-bottom: 12px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+#add-todo-container .todo-input-element button {
+  background-color: rgb(93, 0, 255);
+  color: white;
+  border-radius: 8px;
+  height: 28px;
+  width: 96px;
+  font-size: 16px;
+  border: none;
+  transition-duration: 0.3s;
+}
+
+#add-todo-container .todo-input-element button:hover {
+  background-color: rgb(58, 0, 159);
+  cursor: pointer;
+}
+
+#add-todo-container .error {
+  color: red;
+  font-size: 14px;
+}
+
+#add-roommate-container .close-button,
+#add-todo-container .close-button {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background-color: lightcoral;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+}

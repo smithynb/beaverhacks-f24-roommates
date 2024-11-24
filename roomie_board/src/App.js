@@ -6,10 +6,12 @@ import Calendar from './components/Calendar';
 import TaskContainer from './components/TaskContainer';
 import TodoBoard from './components/TodoBoard';
 import AddTodo from './components/AddTodo';
+import AddRoommate from './components/AddRoommate';
 import { addTodo, getTodos, deleteTodo, getRoommates } from './firebase';
 
 function App() {
   const [isAddTodoVisible, setIsAddTodoVisible] = useState(false);
+  const [isAddRoommateVisible, setIsAddRoommateVisible] = useState(false);
   const [todos, setTodos] = useState([]);
   const [selectedRoommate, setSelectedRoommate] = useState('');
   const [roommates, setRoommates] = useState([]);
@@ -70,10 +72,23 @@ function App() {
     }
   };
 
+  const handleAddRoommateClick = () => {
+    setIsAddRoommateVisible(true);
+  };
+
+  const handleRoommateAdded = async () => {
+    const roommates = await getRoommates();
+    setRoommates(roommates);
+  };
+
   return (
     <div className="App font-sans">
       <div className="left-side">
-        <RoommateSelector selectedRoommate={selectedRoommate} onSelectRoommate={setSelectedRoommate} />
+        <RoommateSelector
+          selectedRoommate={selectedRoommate}
+          onSelectRoommate={setSelectedRoommate}
+          onAddRoommateClick={handleAddRoommateClick}
+        />
         <TimeViewSelector />
         <Calendar />
       </div>
@@ -81,6 +96,11 @@ function App() {
         <TaskContainer />
         <TodoBoard toDoAddClickHandler={toDoAddClickHandler} todos={todos} onDeleteTodo={handleDeleteTodo} />
         <AddTodo isAddTodoVisible={isAddTodoVisible} onAddTodo={handleAddTodo} setIsAddTodoVisible={setIsAddTodoVisible} />
+        <AddRoommate
+          isAddRoommateVisible={isAddRoommateVisible}
+          setIsAddRoommateVisible={setIsAddRoommateVisible}
+          onRoommateAdded={handleRoommateAdded}
+        />
       </div>
     </div>
   );

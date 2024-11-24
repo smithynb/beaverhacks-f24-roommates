@@ -34,9 +34,17 @@ function AddTodo ({ isAddTodoVisible, onAddTodo, setIsAddTodoVisible }) {
     }
   };
 
+  const handleClose = () => {
+    setIsAddTodoVisible(false);
+    setTask('');
+    setRoommateId('');
+    setError('');
+  };
+
   return (
     <Draggable>
-      <div className={isAddTodoVisible ? "" : "hidden"} id="add-todo-container">
+      <div className={isAddTodoVisible ? "visible" : "hidden"} id="add-todo-container">
+        <button className="close-button" onClick={handleClose}>X</button>
         <h3>Add a task</h3>
         <form onSubmit={handleSubmit}>
           <div className="todo-input-element">
@@ -58,7 +66,7 @@ function AddTodo ({ isAddTodoVisible, onAddTodo, setIsAddTodoVisible }) {
                 <option key={roommate.id} value={roommate.id}>{roommate.name}</option>
               ))}
             </select>
-            <button type="submit" disabled={!task || !roommateId}>Add</button>
+            <button type="submit">Add</button>
             {error && <p className="error">{error}</p>}
           </div>
         </form>
