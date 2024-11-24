@@ -6,51 +6,81 @@ import Calendar from './components/Calendar';
 import TaskContainer from './components/TaskContainer';
 import TodoBoard from './components/TodoBoard';
 import AddTodo from './components/AddTodo';
-import {db} from './firebase';
-
-//firebase functions
-import { addTodo, getTodos, deleteTodo } from './firebase';
+import { addTodo, getTodos, deleteTodo, getRoommates } from './firebase';
 
 function App() {
   const [isAddTodoVisible, setIsAddTodoVisible] = useState(false);
   const [todos, setTodos] = useState([]);
+  const [selectedRoommate, setSelectedRoommate] = useState('');
+  const [roommates, setRoommates] = useState([]);
 
   useEffect(() => {
-    const fetchTodos = async () => {
-      const todos = await getTodos();
-      setTodos(todos);
+    const fetchRoommates = async () => {
+      try {
+        const roommates = await getRoommates();
+        setRoommates(roommates);
+        if (roommates.length > 0) {
+          setSelectedRoommate(roommates[0].id);
+        }
+      } catch (error) {
+        console.error("Error fetching roommates: ", error);
+      }
     };
-    fetchTodos();
-  }, [])
+    fetchRoommates();
+  }, []);
 
-  function toDoAddClickHandler(event) {
+  useEffect(() => {
+    if (selectedRoommate) {
+      const fetchTodos = async () => {
+        try {
+          const todos = await getTodos(selectedRoommate);
+          setTodos(todos);
+        } catch (error) {
+          console.error("Error fetching todos: ", error);
+        }
+      };
+      fetchTodos();
+    }
+  }, [selectedRoommate]);
+
+  const toDoAddClickHandler = () => {
     setIsAddTodoVisible(!isAddTodoVisible);
-  }
+  };
 
-  const handleAddTodo = async (todo) => {
-    await addTodo(todo);
-    const todos = await getTodos();
-    setTodos(todos);
-    setIsAddTodoVisible(false);
+  const handleAddTodo = async (roommateId, todo) => {
+    try {
+      await addTodo(roommateId, todo);
+      if (roommateId === selectedRoommate) {
+        const todos = await getTodos(roommateId);
+        setTodos(todos);
+      }
+      setIsAddTodoVisible(false);
+    } catch (error) {
+      console.error("Error adding todo: ", error);
+    }
   };
 
   const handleDeleteTodo = async (id) => {
-    await deleteTodo(id);
-    const todos = await getTodos();
-    setTodos(todos);
+    try {
+      await deleteTodo(selectedRoommate, id);
+      const todos = await getTodos(selectedRoommate);
+      setTodos(todos);
+    } catch (error) {
+      console.error("Error deleting todo: ", error);
+    }
   };
 
   return (
     <div className="App font-sans">
       <div className="left-side">
-        <RoommateSelector />
+        <RoommateSelector selectedRoommate={selectedRoommate} onSelectRoommate={setSelectedRoommate} />
         <TimeViewSelector />
         <Calendar />
       </div>
       <div className="right-side">
         <TaskContainer />
         <TodoBoard toDoAddClickHandler={toDoAddClickHandler} todos={todos} onDeleteTodo={handleDeleteTodo} />
-        <AddTodo isAddTodoVisible={isAddTodoVisible} onAddTodo={handleAddTodo} />
+        <AddTodo isAddTodoVisible={isAddTodoVisible} onAddTodo={handleAddTodo} setIsAddTodoVisible={setIsAddTodoVisible} />
       </div>
     </div>
   );

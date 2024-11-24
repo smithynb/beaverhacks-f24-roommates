@@ -13,7 +13,7 @@ function TodoBoard({toDoAddClickHandler, todos, onDeleteTodo }) {
               <label>
                 <input type="checkbox" />{todo.task}
               </label>
-              <button onClick={() => onDeleteTodo(todo.id)}>Delete</button>
+              <button onClick={() => onDeleteTodo(todo.id)}>-</button>
             </div>
         ))}
       </div>
