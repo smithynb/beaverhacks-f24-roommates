@@ -1,28 +1,32 @@
 
-
-import React from 'react';
+import './Calendar.css'
+import React, { useRef } from 'react';
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
 
+function Calendar({ currentView, onMonthChange, calendarRef }) {
 
-function Calendar() {
+
   return (
     <div className="App">
       <FullCalendar
+        ref={calendarRef}
+        key={currentView}
         plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
-        initialView="timeGridWeek"
-        headerToolbar={{
-          center: "dayGridMonth,timeGridWeek,timeGridDay new",
-        }}
-        eventColor="red"
-        nowIndicator
-        dateClick={(e) => console.log(e.dateStr)}
-        eventClick={(e) => console.log(e.event.id)}
+        initialView={currentView}
+        allDaySlot={false}
+        headerToolbar={false}
+        height="auto"
+        slotLabelInterval="04:00:00" 
+        slotDuration="04:00:00" 
+        dayHeaderFormat={{ day: 'numeric' }} 
+        events={[]}
       />
     </div>
   );
 }
 
 export default Calendar;
+
