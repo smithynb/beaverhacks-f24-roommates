@@ -172,7 +172,8 @@ html{
   accent-color: rgb(93, 0, 255);
 }
 
-#add-roommate-container {
+#add-roommate-container,
+#remove-roommate-container {
   padding: 8px;
   display: none;
   flex-direction: column;
@@ -186,32 +187,46 @@ html{
   cursor: move;
 }
 
-#add-roommate-container.visible {
+#add-roommate-container.visible,
+#remove-roommate-container.visible {
   display: flex; /* Show when the visible class is added */
 }
 
-#add-roommate-container h3 {
+#add-roommate-container h3, 
+#remove-roommate-container h3{
   font-size: 18px;
   font-weight: 700;
 }
 
-#add-roommate-container .roommate-input-element {
+#add-roommate-container .roommate-input-element 
+#remove-roommate-container .roommate-input-element {
   display: flex;
   flex-direction: column;
 }
 
-#add-roommate-container .roommate-input-element label {
+#add-roommate-container .roommate-input-element label,
+#remove-roommate-container .roommate-input-element label {
   margin-bottom: 8px;
 }
 
-#add-roommate-container .roommate-input-element input {
+#add-roommate-container .roommate-input-element input,
+#remove-roommate-container .roommate-input-element input {
   margin-bottom: 12px;
   padding: 8px;
   border: 1px solid #ccc;
   border-radius: 4px;
 }
 
-#add-roommate-container .roommate-input-element button {
+#add-roommate-container .roommate-input-element select,
+#remove-roommate-container .roommate-input-element select {
+  margin-bottom: 12px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+#add-roommate-container .roommate-input-element button,
+#remove-roommate-container .roommate-input-element button {
   background-color: rgb(93, 0, 255);
   color: white;
   border-radius: 8px;
@@ -222,17 +237,20 @@ html{
   transition-duration: 0.3s;
 }
 
-#add-roommate-container .roommate-input-element button:hover {
+#add-roommate-container .roommate-input-element button:hover,
+#remove-roommate-container .roommate-input-element button:hover {
   background-color: rgb(58, 0, 159);
   cursor: pointer;
 }
 
-#add-roommate-container .error {
+#add-roommate-container .error,
+#remove-roommate-container .error {
   color: red;
   font-size: 14px;
 }
 
-#add-roommate-container .close-button {
+#add-roommate-container .close-button,
+#remove-roommate-container .close-button {
   position: absolute;
   top: 8px;
   right: 8px;
@@ -321,4 +339,14 @@ html{
   border-radius: 8px;
   font-size: 16px;
   cursor: pointer;
+}
+
+.todo-board-container hr {
+  border: none;
+  border-top: 2px solid #ccc;
+  margin-bottom: 16px;
+}
+
+.roommate-input-element label {
+  margin-right: 12px;
 }

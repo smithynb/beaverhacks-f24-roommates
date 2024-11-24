@@ -2,19 +2,15 @@ import React, { useState, useEffect } from 'react';
 import Draggable from 'react-draggable';
 import { getRoommates } from '../firebase';
 
-function AddTodo ({ isAddTodoVisible, onAddTodo, setIsAddTodoVisible }) {
+function AddTodo ({ isAddTodoVisible, onAddTodo, setIsAddTodoVisible, roommates }) {
   const [task, setTask] = useState('');
   const [roommateId, setRoommateId] = useState('');
-  const [roommates, setRoommates] = useState([]);
+  const [localRoommates, setLocalRoommates] = useState([]);
   const [error, setError] = useState('');
 
   useEffect(() => {
-    const fetchRoommates = async () => {
-      const roommates = await getRoommates();
-      setRoommates(roommates);
-    };
-    fetchRoommates();
-  }, []);
+    setLocalRoommates(roommates);
+  }, [roommates]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -27,7 +23,7 @@ function AddTodo ({ isAddTodoVisible, onAddTodo, setIsAddTodoVisible }) {
       setTask('');
       setRoommateId('');
       setError('');
-      setIsAddTodoVisible(false); // Hide the container
+      setIsAddTodoVisible(false); 
     } catch (error) {
       console.error("Error adding todo: ", error);
       setError('Error adding todo');
@@ -62,11 +58,11 @@ function AddTodo ({ isAddTodoVisible, onAddTodo, setIsAddTodoVisible }) {
               onChange={(e) => setRoommateId(e.target.value)}
             >
               <option value="">Select Roommate</option>
-              {roommates.map((roommate) => (
+              {localRoommates.map((roommate) => (
                 <option key={roommate.id} value={roommate.id}>{roommate.name}</option>
               ))}
             </select>
-            <button type="submit">Add</button>
+            <button type="submit" disabled={!task || !roommateId}>Add</button>
             {error && <p className="error">{error}</p>}
           </div>
         </form>

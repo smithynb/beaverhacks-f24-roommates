@@ -17,7 +17,7 @@ function AddRoommate({ isAddRoommateVisible, setIsAddRoommateVisible, onRoommate
       setName('');
       setError('');
       setIsAddRoommateVisible(false);
-      onRoommateAdded();
+      onRoommateAdded(); // Call the callback function
     } catch (error) {
       console.error("Error adding roommate: ", error);
       setError('Error adding roommate');
@@ -32,7 +32,7 @@ function AddRoommate({ isAddRoommateVisible, setIsAddRoommateVisible, onRoommate
 
   return (
     <Draggable>
-      <div className={isAddRoommateVisible ? "visible" : ""} id="add-roommate-container">
+      <div className={isAddRoommateVisible ? "visible" : "hidden"} id="add-roommate-container">
         <button className="close-button" onClick={handleClose}>X</button>
         <h3>Add a Roommate</h3>
         <form onSubmit={handleSubmit}>

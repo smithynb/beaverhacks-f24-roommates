@@ -3,6 +3,7 @@ import React from 'react';
 function TodoBoard({toDoAddClickHandler, todos, onDeleteTodo }) {
   return (
     <div className="todo-board-container">
+      <hr/>
       <div className="todo-title">
         <h2>To-do</h2>
         <button onClick={toDoAddClickHandler}>+</button>

@@ -1,5 +1,5 @@
 import './App.css';
-import { useState, useRef, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import RoommateSelector from './components/RoommateSelector';
 import TimeViewSelector from './components/TimeViewSelector';
 import Calendar from './components/Calendar';
@@ -7,17 +7,19 @@ import TaskContainer from './components/TaskContainer';
 import TodoBoard from './components/TodoBoard';
 import AddTodo from './components/AddTodo';
 import AddRoommate from './components/AddRoommate';
-import { addTodo, getTodos, deleteTodo, getRoommates } from './firebase';
+import RemoveRoommate from './components/RemoveRoommate';
+import { addTodo, getTodos, deleteTodo, getRoommates, deleteRoommate } from './firebase';
 
 function App() {
   const [isAddTodoVisible, setIsAddTodoVisible] = useState(false);
   const [isAddRoommateVisible, setIsAddRoommateVisible] = useState(false);
-  const [currentView, setCurrentView] = useState('timeGridWeek');
-  const [currentMonth, setCurrentMonth] = useState(new Date().toLocaleString('default', { month: 'long' }));
-  const calendarRef = useRef(null);
+  const [isRemoveRoommateVisible, setIsRemoveRoommateVisible] = useState(false);
   const [todos, setTodos] = useState([]);
   const [selectedRoommate, setSelectedRoommate] = useState('');
   const [roommates, setRoommates] = useState([]);
+  const [currentView, setCurrentView] = useState('timeGridWeek');
+  const [currentMonth, setCurrentMonth] = useState(new Date().toLocaleString('default', { month: 'long' }));
+  const calendarRef = useRef(null);
 
   useEffect(() => {
     const fetchRoommates = async () => {
@@ -79,28 +81,45 @@ function App() {
     setIsAddRoommateVisible(true);
   };
 
+  const handleRemoveRoommateClick = () => {
+    setIsRemoveRoommateVisible(true);
+  };
+
   const handleRoommateAdded = async () => {
     const roommates = await getRoommates();
     setRoommates(roommates);
   };
 
-  const handleViewChange = (newView) => {
-    setCurrentView(newView);
+  const handleRoommateRemoved = async () => {
+    const roommates = await getRoommates();
+    setRoommates(roommates);
+    if (roommates.length > 0) {
+      setSelectedRoommate(roommates[0].id);
+    } else {
+      setSelectedRoommate('');
+    }
   };
 
-  const handleMonthChange = (newMonth) => {
-    setCurrentMonth(newMonth);
+  const handleViewChange = (view) => {
+    setCurrentView(view);
+  };
+
+  const handleMonthChange = (month) => {
+    setCurrentMonth(month);
   };
 
   return (
     <div className="App font-sans">
       <div className="left-side">
-        <RoommateSelector 
-        selectedRoommate={selectedRoommate} 
-        onSelectRoommate={setSelectedRoommate} 
-        onAddRoommateClick={handleAddRoommateClick}/>
-        <TimeViewSelector 
-          onViewChange={handleViewChange} 
+        <RoommateSelector
+          selectedRoommate={selectedRoommate}
+          onSelectRoommate={setSelectedRoommate}
+          onAddRoommateClick={handleAddRoommateClick}
+          onRemoveRoommateClick={handleRemoveRoommateClick}
+          roommates={roommates} 
+        />
+        <TimeViewSelector
+          onViewChange={handleViewChange}
           currentView={currentView}
           currentMonth={currentMonth}
           onMonthChange={handleMonthChange}
@@ -115,11 +134,22 @@ function App() {
       <div className="right-side">
         <TaskContainer />
         <TodoBoard toDoAddClickHandler={toDoAddClickHandler} todos={todos} onDeleteTodo={handleDeleteTodo} />
-        <AddTodo isAddTodoVisible={isAddTodoVisible} onAddTodo={handleAddTodo} setIsAddTodoVisible={setIsAddTodoVisible} />
+        <AddTodo
+          isAddTodoVisible={isAddTodoVisible}
+          onAddTodo={handleAddTodo}
+          setIsAddTodoVisible={setIsAddTodoVisible}
+          roommates={roommates} 
+        />
         <AddRoommate
           isAddRoommateVisible={isAddRoommateVisible}
           setIsAddRoommateVisible={setIsAddRoommateVisible}
           onRoommateAdded={handleRoommateAdded}
+        />
+        <RemoveRoommate
+          isRemoveRoommateVisible={isRemoveRoommateVisible}
+          setIsRemoveRoommateVisible={setIsRemoveRoommateVisible}
+          onRoommateRemoved={handleRoommateRemoved}
+          roommates={roommates} 
         />
       </div>
     </div>

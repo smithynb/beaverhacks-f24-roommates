@@ -3,9 +3,9 @@ import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc } from "fireb
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
-  authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
-  projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
+  apiKey: "AIzaSyDWWUjTWpHad5o9IargbaPb4mgZA2iVEwc",
+  authDomain: "roomieboard.firebaseapp.com",
+  projectId: "roomieboard",
   storageBucket: "roomieboard.appspot.com",
   messagingSenderId: "376622126162",
   appId: "1:376622126162:web:6e906fba25d588776b7b8b"
@@ -68,5 +68,15 @@ export const deleteTodo = async (roommateId, id) => {
     await deleteDoc(doc(db, "roommates", roommateId, "todos", id));
   } catch (e) {
     console.error("Error deleting todo: ", e);
+  }
+};
+
+// Delete roommate function
+export const deleteRoommate = async (roommateId) => {
+  try {
+    await deleteDoc(doc(db, "roommates", roommateId));
+    console.log("Roommate deleted with ID: ", roommateId);
+  } catch (e) {
+    console.error("Error deleting roommate: ", e);
   }
 };
