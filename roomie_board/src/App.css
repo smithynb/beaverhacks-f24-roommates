@@ -5,10 +5,6 @@ html{
 }
 
 .App {
-
-}
-
-.App-body{
   width: 80%;
   margin-left: auto;
   margin-right: auto;
@@ -19,6 +15,8 @@ html{
     animation: App-logo-spin infinite 20s linear;
   }
 }
+
+
 
 .App-header {
   background-color: wheat;
@@ -50,11 +48,111 @@ html{
   font-size: calc(10px + 2vmin);
   font-weight: 700;
 }
-
-
 #select-roommate {
   margin-right: 8px;
+  border-radius: 8px;
   height: calc(12px + 2vmin);
   font-weight: 700;
   font-size: calc(8px + 2vmin);
+}
+
+.time-view-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: right;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.time-view-container button {
+  color: rgb(93, 0, 255);
+  height: 28px;
+  width: 100px;
+  font-size: 18px;
+  background-color: white;
+  border-radius: 8px;
+  border: none;
+}
+.time-view-container button:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+.time-view-container button:active {
+  background-color: rgb(93, 0, 255);
+  color: white;
+} 
+
+.todo-title {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: left;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.todo-title h2 {
+  margin-right: 12px;
+}
+.todo-title button {
+  margin-right: 12px;
+  background-color: rgb(93, 0, 255);
+  color: white;
+  border-radius: 8px;
+  height: 28px;
+  width: 28px;
+  font-size: 18px;
+  border: none;
+}
+.todo-title button:hover {
+  cursor: pointer;
+}
+
+#add-todo-container {
+  padding: 8px;
+  display: flex;
+  position: fixed;
+  top: 33%;
+  left: 33%;
+  flex-direction: column;
+  align-items: left;
+  justify-content: left;
+  background-color: rgb(230, 218, 255);
+  border-radius: 8px;
+  height: 266px;
+  width: 300px;
+}
+#add-todo-container h3 {
+  font-size: 18px;
+  font-weight: 700;
+}
+#add-todo-container .todo-input-element {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+#add-todo-container .todo-input-element label,
+#add-todo-container .todo-input-element input,
+#add-todo-container .todo-input-element select {
+  margin-bottom: 10px;
+  width: 60%;
+  text-wrap: wrap;
+}
+#add-todo-container button {
+  width: 20%;
+  height: 30px;
+  border-radius: 8px;
+  border: none;
+  color: white;
+  background-color: rgb(93, 0, 255);;
+}
+#add-todo-container button:hover {
+  cursor: pointer;
+}
+
+.hidden{
+  display: none;
+}
+
+#add-todo-container.hidden {
+  display: none;
 }

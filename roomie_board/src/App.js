@@ -1,10 +1,15 @@
 import './App.css';
-
+import { useState } from 'react';
 function App() {
-  return (
-    <div className="App">
+  const [isAddTodoVisible, setIsAddTodoVisible] = useState(false);
 
-      <body className = "App-body font-sans">
+  function toDoAddClickHandler(event){
+    console.log("Add task clicked");
+    setIsAddTodoVisible(!isAddTodoVisible);
+  }
+
+  return (
+    <div className="App font-sans">
         <div className = "roommate-container">
           <select name = "roommate" id = "select-roommate">
             <option value = "roommate1">Louis'</option>
@@ -16,9 +21,8 @@ function App() {
         
 
         <div className = "time-view-container">
-            <h2 className = "flex">Time View</h2>
-            <button className = "flex">Day</button>
-            <button className = "flex">Week</button>
+            <button>Day</button>
+            <button>Week</button>
           </div>
 
           <div className = "calendar-container">
@@ -31,13 +35,36 @@ function App() {
           </div>
 
           <div className = "todo-board-container">
-            <h2>To-do</h2>
-            <label>
+            <div className = "todo-title">
+              <h2>To-do</h2>
+              <button onClick={toDoAddClickHandler}>+</button>
+            </div>
+            <div className = "todo-list">
+              <label>
             <input type = "checkbox"/>Clean the stove</label>
+            </div>
+            
           </div>
 
+          <div className = {isAddTodoVisible ? "" : "hidden"} id = "add-todo-container" >
+            <h3>Add a task</h3>
+            <div className = "todo-input-element">
+              <label htmlFor="todo-text-input">Task</label>
+              <input type = "text" id = "todo-input"/>
 
-        </body>
+              <label htmlFor="todo-text-input">Time</label>
+              <input type = "text" id = "todo-input"/>
+
+              <label htmlFor="todo-text-input">Roommate</label>
+                <select name = "roommate">
+                  <option value = "roommate1">Louis'</option>
+                  <option value = "roommate2">Benny's</option>
+                  <option value = "roommate3">Reina's</option>
+                </select>
+              
+              <button className = "add-button">Add</button>
+            </div>
+          </div>
 
     </div>
   );
