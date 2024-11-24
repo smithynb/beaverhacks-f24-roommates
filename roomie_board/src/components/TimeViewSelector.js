@@ -6,23 +6,20 @@ const TimeViewSelector = ({ onViewChange, currentView, currentMonth, onMonthChan
   const [currentDate, setCurrentDate] = useState(new Date());
 
   const handlePrevMonth = () => {
-    if (calendarRef.current && calendarRef.current.getApi()) {
-      const newDate = new Date(currentDate);
-      newDate.setMonth(currentDate.getMonth() - 1);
-      setCurrentDate(newDate);
-      onMonthChange(newDate.toLocaleString('default', { month: 'long' }));
-      calendarRef.current.getApi().prev();
-    }
+    const calendarApi = calendarRef.current.getApi();
+    calendarApi.prev();
+    const newDate = calendarApi.getDate();
+    setCurrentDate(newDate);
+    onMonthChange(newDate.toLocaleString('default', { month: 'long' }));
   };
 
   const handleNextMonth = () => {
-    if (calendarRef.current && calendarRef.current.getApi()) {
-      const newDate = new Date(currentDate);
-      newDate.setMonth(currentDate.getMonth() + 1);
-      setCurrentDate(newDate);
-      onMonthChange(newDate.toLocaleString('default', { month: 'long' }));
-      calendarRef.current.getApi().next();
-    }
+    const calendarApi = calendarRef.current.getApi();
+    calendarApi.next();
+    
+    const newDate = calendarApi.getDate();
+    setCurrentDate(newDate);
+    onMonthChange(newDate.toLocaleString('default', { month: 'long' }));
   };
 
   return (
@@ -30,6 +27,10 @@ const TimeViewSelector = ({ onViewChange, currentView, currentMonth, onMonthChan
       <div className="selector-content">
         <div className="month-header">
           {currentMonth}
+          <div className="navigation-buttons">
+          <button onClick={handlePrevMonth}>&larr;</button>
+          <button onClick={handleNextMonth}>&rarr;</button>
+        </div>
         </div>
         <div className="button-group">
           <button 

@@ -6,29 +6,11 @@ import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
 
-function Calendar({ currentView, onMonthChange }) {
-  const calendarRef = useRef(null);
+function Calendar({ currentView, onMonthChange, calendarRef }) {
 
-  const handlePrevMonth = () => {
-    const calendarApi = calendarRef.current.getApi();
-    calendarApi.prev();
-    const currentDate = calendarApi.getDate();
-    onMonthChange(currentDate.toLocaleString('default', { month: 'long' }));
-  };
-
-  const handleNextMonth = () => {
-    const calendarApi = calendarRef.current.getApi();
-    calendarApi.next();
-    const currentDate = calendarApi.getDate();
-    onMonthChange(currentDate.toLocaleString('default', { month: 'long' }));
-  };
 
   return (
     <div className="App">
-      <div className="navigation-buttons">
-        <button onClick={handlePrevMonth}>&larr;</button>
-        <button onClick={handleNextMonth}>&rarr;</button>
-      </div>
       <FullCalendar
         ref={calendarRef}
         key={currentView}
@@ -47,3 +29,4 @@ function Calendar({ currentView, onMonthChange }) {
 }
 
 export default Calendar;
+

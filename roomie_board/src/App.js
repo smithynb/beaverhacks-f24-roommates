@@ -1,5 +1,5 @@
 import './App.css';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import RoommateSelector from './components/RoommateSelector';
 import TimeViewSelector from './components/TimeViewSelector';
 import Calendar from './components/Calendar';
@@ -29,6 +29,7 @@ function App() {
   const [isAddTodoVisible, setIsAddTodoVisible] = useState(false);
   const [currentView, setCurrentView] = useState('timeGridWeek');
   const [currentMonth, setCurrentMonth] = useState(new Date().toLocaleString('default', { month: 'long' }));
+  const calendarRef = useRef(null);
 
   function toDoAddClickHandler(event) {
     console.log("Add task clicked");
@@ -51,10 +52,13 @@ function App() {
           onViewChange={handleViewChange} 
           currentView={currentView}
           currentMonth={currentMonth}
+          onMonthChange={handleMonthChange}
+          calendarRef={calendarRef}
         />
         <Calendar 
           currentView={currentView} 
           onMonthChange={handleMonthChange}
+          calendarRef={calendarRef}
         />
       </div>
       <div className="right-side">
