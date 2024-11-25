@@ -18,3 +18,8 @@ MIT License. See LICENSE for more details.
 
 BeaverHacks Fall 2024 Hackathon
 Created by students for students 😊
+
+
+---
+
+This can be run by yourself on your own firebase app if you fill in firebaseConfg in firebase.js
