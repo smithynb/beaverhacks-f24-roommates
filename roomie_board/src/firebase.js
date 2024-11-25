@@ -3,8 +3,8 @@ import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc } from "fireb
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyDWWUjTWpHad5o9IargbaPb4mgZA2iVEwc",
-  authDomain: "roomieboard.firebaseapp.com",
+  apiKey: path.env.REACT_APP_FIREBASE_API_KEY,
+  authDomain: path.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
   projectId: "roomieboard",
   storageBucket: "roomieboard.appspot.com",
   messagingSenderId: "376622126162",
