@@ -5,10 +5,10 @@ import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc } from "fireb
 const firebaseConfig = {
   apiKey: path.env.REACT_APP_FIREBASE_API_KEY,
   authDomain: path.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
-  projectId: "roomieboard",
-  storageBucket: "roomieboard.appspot.com",
-  messagingSenderId: "376622126162",
-  appId: "1:376622126162:web:6e906fba25d588776b7b8b"
+  projectId: path.env.REACT_APP_FIREBASE_PROJECT_ID,
+  storageBucket: path.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: path.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
+  appId: path.env.REACT_APP_FIREBASE_APP_ID
 };
 
 // Initialize Firebase
